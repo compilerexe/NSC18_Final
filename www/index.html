@@ -1,0 +1,382 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Monitor</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
+
+	<style type="text/css">
+		body {
+			background-image: url(images/background.png);
+		}
+	</style>
+
+</head>
+<body>
+	<!-- <nav class="navbar navbar-default"> -->
+
+		<div class="container">
+
+			<!-- <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">NSC18</a>
+		    </div>
+
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav">
+		        <li class="active"><a href="#"><b>Chart</b> <span class="sr-only">(current)</span></a></li>
+		        <li><a href="#">Notes</a></li>
+		        
+		      </ul>
+		      
+		    </div> -->
+
+			<div class="row">
+
+				<div class="col-sm-12" style="margin-top:15px">
+					<div class="form-group">
+						<ul class="nav nav-tabs" style="background-color:#e6ffe6">
+						  <li role="presentation" class="active"><a href="#"><b>Chart</b></a></li>
+						  <li role="presentation"><a href="#">Notes</a></li>
+						  <li role="presentation"><a href="#">News</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="panel panel-info">
+						<div id="chart_now"></div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="panel panel-info">
+						<div id="chart_3_day_ago"></div>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<div class="panel panel-info">
+						<div id="chart_week_ago"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- </nav> -->
+
+
+	<script src="jquery-1.12.1.js"></script>
+	<script src="highcharts.js"></script>
+	<script>
+
+		var chart_temp	= [];
+		var chart_humid = [];
+		var chart_soil	= [];
+
+		$(function () { 
+
+			// =========================== Chart Now ===========================
+
+			$.getJSON("https://api.thingspeak.com/channels/78787/feeds.json?results=49", function(result){
+					
+				
+				for (var i = 1; i <= 48; i++) {
+					chart_temp[i]  = parseInt(result.feeds[i].field1);
+					chart_humid[i] = parseInt(result.feeds[i].field2);
+					chart_soil[i]  = parseInt(result.feeds[i].field3);
+					// $('#my_chart').append("<p>" + result.feeds[i].field1 + "</p>");
+				}
+
+				$('#chart_now').highcharts({
+					chart: { backgroundColor: "#ffffe6"},
+			        title: {
+			            text: 'Sensor chart, To Day.',
+			            x: -20 //center
+			        },
+			        subtitle: {
+			            text: '',
+			            x: -20
+			        },
+			        xAxis: {
+			            categories: ['6.00 am', '6.30 am', '7.00 am', '7.30 am', '8.00 am', '8.30 am',
+			                		 '9.00 am', '9.30 am', '10.00 am', '10.30 am', '11.00 am', '11.30 am',
+			                		 '12.00 am', '12.30 am', '13.00 pm', '13.30 pm', '14.00 pm', '14.30 pm',
+			                		 '15.00 pm', '15.30 pm', '16.00 pm', '16.30 pm', '17.00 pm', '17.30 pm',
+			                		 '18.00 pm', '18.30 pm', '19.00 pm', '19.30 pm', '20.00 pm', '20.30 pm',
+			                		 '21.00 pm', '21.30 pm', '22.00 pm', '22.30 pm', '23.00 pm', '23.30 pm',
+			                		 '24.00 pm', '00.30 am', '01.00 am', '01.30 am', '02.00 am', '02.30 am',
+			                		 '03.00 am', '03.30 am', '04.00 am', '04.30 am', '05.00 am', '05.30 am']
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Temperature & Humidity & Soil Moisture'
+			            },
+			            plotLines: [{
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            }]
+			        },
+			        tooltip: {
+			            valueSuffix: ''
+			        },
+			        legend: {
+			            layout: 'vertical',
+			            align: 'right',
+			            verticalAlign: 'middle',
+			            borderWidth: 0
+			        },
+			        series: [{
+			            name: 'Temp (C)',
+			            data: [chart_temp[1],chart_temp[2],chart_temp[3],chart_temp[4],chart_temp[5],
+			            	   chart_temp[6],chart_temp[7],chart_temp[8],chart_temp[9],chart_temp[10],
+			            	   chart_temp[11],chart_temp[12],chart_temp[13],chart_temp[14],chart_temp[15],
+			            	   chart_temp[16],chart_temp[17],chart_temp[18],chart_temp[19],chart_temp[20],
+			            	   chart_temp[21],chart_temp[22],chart_temp[23],chart_temp[24],chart_temp[25],
+			            	   chart_temp[26],chart_temp[27],chart_temp[28],chart_temp[29],chart_temp[30],
+			            	   chart_temp[31],chart_temp[32],chart_temp[33],chart_temp[34],chart_temp[35],
+			            	   chart_temp[36],chart_temp[37],chart_temp[38],chart_temp[39],chart_temp[40],
+			            	   chart_temp[41],chart_temp[42],chart_temp[43],chart_temp[44],chart_temp[45],
+			            	   chart_temp[46],chart_temp[47],chart_temp[48]]
+			            
+
+			        }, 
+			        {
+			            name: 'Humid (%)',
+			            data: [chart_humid[1],chart_humid[2],chart_humid[3],chart_humid[4],chart_humid[5],
+			            	   chart_humid[6],chart_humid[7],chart_humid[8],chart_humid[9],chart_humid[10],
+			            	   chart_humid[11],chart_humid[12],chart_humid[13],chart_humid[14],chart_humid[15],
+			            	   chart_humid[16],chart_humid[17],chart_humid[18],chart_humid[19],chart_humid[20],
+			            	   chart_humid[21],chart_humid[22],chart_humid[23],chart_humid[24],chart_humid[25],
+			            	   chart_humid[26],chart_humid[27],chart_humid[28],chart_humid[29],chart_humid[30],
+			            	   chart_humid[31],chart_humid[32],chart_humid[33],chart_humid[34],chart_humid[35],
+			            	   chart_humid[36],chart_humid[37],chart_humid[38],chart_humid[39],chart_humid[40],
+			            	   chart_humid[41],chart_humid[42],chart_humid[43],chart_humid[44],chart_humid[45],
+			            	   chart_humid[46],chart_humid[47],chart_humid[48]]
+			        }
+			        , 
+			        {
+			        	name: 'Soil (%)',
+			        	data: [chart_soil[1],chart_soil[2],chart_soil[3],chart_soil[4],chart_soil[5],
+			            	   chart_soil[6],chart_soil[7],chart_soil[8],chart_soil[9],chart_soil[10],
+			            	   chart_soil[11],chart_soil[12],chart_soil[13],chart_soil[14],chart_soil[15],
+			            	   chart_soil[16],chart_soil[17],chart_soil[18],chart_soil[19],chart_soil[20],
+			            	   chart_soil[21],chart_soil[22],chart_soil[23],chart_soil[24],chart_soil[25],
+			            	   chart_soil[26],chart_soil[27],chart_soil[28],chart_soil[29],chart_soil[30],
+			            	   chart_soil[31],chart_soil[32],chart_soil[33],chart_soil[34],chart_soil[35],
+			            	   chart_soil[36],chart_soil[37],chart_soil[38],chart_soil[39],chart_soil[40],
+			            	   chart_soil[41],chart_soil[42],chart_soil[43],chart_soil[44],chart_soil[45],
+			            	   chart_soil[46],chart_soil[47],chart_soil[48]]
+			        }
+			        ]
+			    });
+
+			});
+			
+			//=========================== End Chart Now ===========================
+
+		    // =========================== Chart 3 Day ago ===========================
+
+			$.getJSON("https://api.thingspeak.com/channels/78787/feeds.json?results=146", function(result){
+					
+				
+				for (var i = 1; i <= 145; i++) {
+					chart_temp[i]  = parseInt(result.feeds[i].field1);
+					chart_humid[i] = parseInt(result.feeds[i].field2);
+					chart_soil[i]  = parseInt(result.feeds[i].field3);
+					// $('#my_chart').append("<p>" + result.feeds[i].field1 + "</p>");
+				}
+
+				$('#chart_3_day_ago').highcharts({
+					chart: { backgroundColor: "#ffffe6"},
+			        title: {
+			            text: 'Sensor chart, 3 Day ago.',
+			            x: -20 //center
+			        },
+			        subtitle: {
+			            text: '',
+			            x: -20
+			        },
+			        xAxis: {
+			            categories: ['6.00 am', '6.30 am', '7.00 am', '7.30 am', '8.00 am', '8.30 am',
+			                		 '9.00 am', '9.30 am', '10.00 am', '10.30 am', '11.00 am', '11.30 am',
+			                		 '12.00 am', '12.30 am', '13.00 pm', '13.30 pm', '14.00 pm', '14.30 pm',
+			                		 '15.00 pm', '15.30 pm', '16.00 pm', '16.30 pm', '17.00 pm', '17.30 pm',
+			                		 '18.00 pm', '18.30 pm', '19.00 pm', '19.30 pm', '20.00 pm', '20.30 pm',
+			                		 '21.00 pm', '21.30 pm', '22.00 pm', '22.30 pm', '23.00 pm', '23.30 pm',
+			                		 '24.00 pm', '00.30 am', '01.00 am', '01.30 am', '02.00 am', '02.30 am',
+			                		 '03.00 am', '03.30 am', '04.00 am', '04.30 am', '05.00 am', '05.30 am']
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Temperature & Humidity & Soil Moisture'
+			            },
+			            plotLines: [{
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            }]
+			        },
+			        tooltip: {
+			            valueSuffix: ''
+			        },
+			        legend: {
+			            layout: 'vertical',
+			            align: 'right',
+			            verticalAlign: 'middle',
+			            borderWidth: 0
+			        },
+			        series: [{
+			            name: 'Temp (C)',
+			            data: [chart_temp[1],chart_temp[2],chart_temp[3],chart_temp[4],chart_temp[5],
+			            	   chart_temp[6],chart_temp[7],chart_temp[8],chart_temp[9],chart_temp[10],
+			            	   chart_temp[11],chart_temp[12],chart_temp[13],chart_temp[14],chart_temp[15],
+			            	   chart_temp[16],chart_temp[17],chart_temp[18],chart_temp[19],chart_temp[20],
+			            	   chart_temp[21],chart_temp[22],chart_temp[23],chart_temp[24],chart_temp[25],
+			            	   chart_temp[26],chart_temp[27],chart_temp[28],chart_temp[29],chart_temp[30],
+			            	   chart_temp[31],chart_temp[32],chart_temp[33],chart_temp[34],chart_temp[35],
+			            	   chart_temp[36],chart_temp[37],chart_temp[38],chart_temp[39],chart_temp[40],
+			            	   chart_temp[41],chart_temp[42],chart_temp[43],chart_temp[44],chart_temp[45],
+			            	   chart_temp[46],chart_temp[47],chart_temp[48]]
+			            
+
+			        }, 
+			        {
+			            name: 'Humid (%)',
+			            data: [chart_humid[1],chart_humid[2],chart_humid[3],chart_humid[4],chart_humid[5],
+			            	   chart_humid[6],chart_humid[7],chart_humid[8],chart_humid[9],chart_humid[10],
+			            	   chart_humid[11],chart_humid[12],chart_humid[13],chart_humid[14],chart_humid[15],
+			            	   chart_humid[16],chart_humid[17],chart_humid[18],chart_humid[19],chart_humid[20],
+			            	   chart_humid[21],chart_humid[22],chart_humid[23],chart_humid[24],chart_humid[25],
+			            	   chart_humid[26],chart_humid[27],chart_humid[28],chart_humid[29],chart_humid[30],
+			            	   chart_humid[31],chart_humid[32],chart_humid[33],chart_humid[34],chart_humid[35],
+			            	   chart_humid[36],chart_humid[37],chart_humid[38],chart_humid[39],chart_humid[40],
+			            	   chart_humid[41],chart_humid[42],chart_humid[43],chart_humid[44],chart_humid[45],
+			            	   chart_humid[46],chart_humid[47],chart_humid[48]]
+			        }
+			        , 
+			        {
+			        	name: 'Soil (%)',
+			        	data: [chart_soil[1],chart_soil[2],chart_soil[3],chart_soil[4],chart_soil[5],
+			            	   chart_soil[6],chart_soil[7],chart_soil[8],chart_soil[9],chart_soil[10],
+			            	   chart_soil[11],chart_soil[12],chart_soil[13],chart_soil[14],chart_soil[15],
+			            	   chart_soil[16],chart_soil[17],chart_soil[18],chart_soil[19],chart_soil[20],
+			            	   chart_soil[21],chart_soil[22],chart_soil[23],chart_soil[24],chart_soil[25],
+			            	   chart_soil[26],chart_soil[27],chart_soil[28],chart_soil[29],chart_soil[30],
+			            	   chart_soil[31],chart_soil[32],chart_soil[33],chart_soil[34],chart_soil[35],
+			            	   chart_soil[36],chart_soil[37],chart_soil[38],chart_soil[39],chart_soil[40],
+			            	   chart_soil[41],chart_soil[42],chart_soil[43],chart_soil[44],chart_soil[45],
+			            	   chart_soil[46],chart_soil[47],chart_soil[48]]
+			        }
+			        ]
+			    });
+
+			});
+			
+			//=========================== End Chart 3 Day ago ===========================
+
+			// =========================== Chart Week ago ===========================
+
+			$.getJSON("https://api.thingspeak.com/channels/78787/feeds.json?results=337", function(result){
+					
+				
+				for (var i = 1; i <= 336; i++) {
+					chart_temp[i]  = parseInt(result.feeds[i].field1);
+					chart_humid[i] = parseInt(result.feeds[i].field2);
+					chart_soil[i]  = parseInt(result.feeds[i].field3);
+					// $('#my_chart').append("<p>" + result.feeds[i].field1 + "</p>");
+				}
+
+				$('#chart_week_ago').highcharts({
+					chart: { backgroundColor: "#ffffe6"},
+			        title: {
+			            text: 'Sensor chart, Week ago.',
+			            x: -20 //center
+			        },
+			        subtitle: {
+			            text: '',
+			            x: -20
+			        },
+			        xAxis: {
+			            categories: ['6.00 am', '6.30 am', '7.00 am', '7.30 am', '8.00 am', '8.30 am',
+			                		 '9.00 am', '9.30 am', '10.00 am', '10.30 am', '11.00 am', '11.30 am',
+			                		 '12.00 am', '12.30 am', '13.00 pm', '13.30 pm', '14.00 pm', '14.30 pm',
+			                		 '15.00 pm', '15.30 pm', '16.00 pm', '16.30 pm', '17.00 pm', '17.30 pm',
+			                		 '18.00 pm', '18.30 pm', '19.00 pm', '19.30 pm', '20.00 pm', '20.30 pm',
+			                		 '21.00 pm', '21.30 pm', '22.00 pm', '22.30 pm', '23.00 pm', '23.30 pm',
+			                		 '24.00 pm', '00.30 am', '01.00 am', '01.30 am', '02.00 am', '02.30 am',
+			                		 '03.00 am', '03.30 am', '04.00 am', '04.30 am', '05.00 am', '05.30 am']
+			        },
+			        yAxis: {
+			            title: {
+			                text: 'Temperature & Humidity & Soil Moisture'
+			            },
+			            plotLines: [{
+			                value: 0,
+			                width: 1,
+			                color: '#808080'
+			            }]
+			        },
+			        tooltip: {
+			            valueSuffix: ''
+			        },
+			        legend: {
+			            layout: 'vertical',
+			            align: 'right',
+			            verticalAlign: 'middle',
+			            borderWidth: 0
+			        },
+			        series: [{
+			            name: 'Temp (C)',
+			            data: [chart_temp[1],chart_temp[2],chart_temp[3],chart_temp[4],chart_temp[5],
+			            	   chart_temp[6],chart_temp[7],chart_temp[8],chart_temp[9],chart_temp[10],
+			            	   chart_temp[11],chart_temp[12],chart_temp[13],chart_temp[14],chart_temp[15],
+			            	   chart_temp[16],chart_temp[17],chart_temp[18],chart_temp[19],chart_temp[20],
+			            	   chart_temp[21],chart_temp[22],chart_temp[23],chart_temp[24],chart_temp[25],
+			            	   chart_temp[26],chart_temp[27],chart_temp[28],chart_temp[29],chart_temp[30],
+			            	   chart_temp[31],chart_temp[32],chart_temp[33],chart_temp[34],chart_temp[35],
+			            	   chart_temp[36],chart_temp[37],chart_temp[38],chart_temp[39],chart_temp[40],
+			            	   chart_temp[41],chart_temp[42],chart_temp[43],chart_temp[44],chart_temp[45],
+			            	   chart_temp[46],chart_temp[47],chart_temp[48]]
+			            
+
+			        }, 
+			        {
+			            name: 'Humid (%)',
+			            data: [chart_humid[1],chart_humid[2],chart_humid[3],chart_humid[4],chart_humid[5],
+			            	   chart_humid[6],chart_humid[7],chart_humid[8],chart_humid[9],chart_humid[10],
+			            	   chart_humid[11],chart_humid[12],chart_humid[13],chart_humid[14],chart_humid[15],
+			            	   chart_humid[16],chart_humid[17],chart_humid[18],chart_humid[19],chart_humid[20],
+			            	   chart_humid[21],chart_humid[22],chart_humid[23],chart_humid[24],chart_humid[25],
+			            	   chart_humid[26],chart_humid[27],chart_humid[28],chart_humid[29],chart_humid[30],
+			            	   chart_humid[31],chart_humid[32],chart_humid[33],chart_humid[34],chart_humid[35],
+			            	   chart_humid[36],chart_humid[37],chart_humid[38],chart_humid[39],chart_humid[40],
+			            	   chart_humid[41],chart_humid[42],chart_humid[43],chart_humid[44],chart_humid[45],
+			            	   chart_humid[46],chart_humid[47],chart_humid[48]]
+			        }
+			        , 
+			        {
+			        	name: 'Soil (%)',
+			        	data: [chart_soil[1],chart_soil[2],chart_soil[3],chart_soil[4],chart_soil[5],
+			            	   chart_soil[6],chart_soil[7],chart_soil[8],chart_soil[9],chart_soil[10],
+			            	   chart_soil[11],chart_soil[12],chart_soil[13],chart_soil[14],chart_soil[15],
+			            	   chart_soil[16],chart_soil[17],chart_soil[18],chart_soil[19],chart_soil[20],
+			            	   chart_soil[21],chart_soil[22],chart_soil[23],chart_soil[24],chart_soil[25],
+			            	   chart_soil[26],chart_soil[27],chart_soil[28],chart_soil[29],chart_soil[30],
+			            	   chart_soil[31],chart_soil[32],chart_soil[33],chart_soil[34],chart_soil[35],
+			            	   chart_soil[36],chart_soil[37],chart_soil[38],chart_soil[39],chart_soil[40],
+			            	   chart_soil[41],chart_soil[42],chart_soil[43],chart_soil[44],chart_soil[45],
+			            	   chart_soil[46],chart_soil[47],chart_soil[48]]
+			        }
+			        ]
+			    });
+
+			});
+			
+			//=========================== End Chart 3 Day ago ===========================
+		});
+	</script>
+</body>
+</html>
