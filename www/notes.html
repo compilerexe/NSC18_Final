@@ -1,0 +1,154 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Control Panel</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
+
+	<style type="text/css">
+		body {
+			background-image: url(images/background.png);
+		}
+	</style>
+
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="row">
+			<div class="col-sm-12" style="margin-top:15px">
+				<div class="form-group">
+					<ul class="nav nav-tabs" style="background-color:#e6ffe6">
+					  <li role="presentation"><a href="index.html">Chart</a></li>
+					  <li role="presentation"><a href="control.html">Control</a></li>
+					  <li role="presentation" class="active"><a href="notes.html"><b>Notes</b></a></li>
+					  <li role="presentation"><a href="news.html">News</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin-top:15px">
+			<div class="col-sm-8"> <!-- Left -->
+				<div class="panel panel-info">
+					<div class="panel-body">
+						<div class="form-group">
+							<div class="col-sm-12 text-left" style="//border:1px solid blue">
+							<p id="time_now" style="font-size:18px">Date & Time : </p>
+							<hr size="1">
+							</div>
+
+						</div>
+						<div class="form-group">
+							<div class="col-sm-12 text-left" style="//border:1px solid blue">
+								<form class="form-horizontal">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Title </label>
+										<div class="col-sm-5">
+											<input type="text" class="form-control" id="field_title" placeholder="What are you want to remember?">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">Body </label>
+										<div class="col-sm-5">
+											<textarea class="form-control" rows="10"></textarea>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4"> <!-- Right -->
+				<div class="panel panel-info">
+					<div class="panel-body">
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script>
+		setInterval(function(){
+			var currentdate = new Date();
+
+			var getDate, getMonth, getHours, getMinutes;
+
+			if (currentdate.getDate() <= 9) {
+				switch (currentdate.getDate()) {
+					case 0: getDate = "00"; break;
+					case 1: getDate = "01"; break;
+					case 2: getDate = "02"; break;
+					case 3: getDate = "03"; break;
+					case 4: getDate = "04"; break;
+					case 5: getDate = "05"; break;
+					case 6: getDate = "06"; break;
+					case 7: getDate = "07"; break;
+					case 8: getDate = "08"; break;
+					case 9: getDate = "09"; break;
+				}
+			} else {
+				getDate = currentdate.getDate();
+			}
+
+			if (currentdate.getMonth() <= 9) {
+				switch (currentdate.getMonth()) {
+					case 0: getMonth = "00"; break;
+					case 1: getMonth = "01"; break;
+					case 2: getMonth = "02"; break;
+					case 3: getMonth = "03"; break;
+					case 4: getMonth = "04"; break;
+					case 5: getMonth = "05"; break;
+					case 6: getMonth = "06"; break;
+					case 7: getMonth = "07"; break;
+					case 8: getMonth = "08"; break;
+					case 9: getMonth = "09"; break;
+				}
+			} else {
+				getMonth = currentdate.getMonth();
+			}
+
+			if (currentdate.getHours() <= 9) {
+				switch (currentdate.getHours()) {
+					case 0: getHours = "00"; break;
+					case 1: getHours = "01"; break;
+					case 2: getHours = "02"; break;
+					case 3: getHours = "03"; break;
+					case 4: getHours = "04"; break;
+					case 5: getHours = "05"; break;
+					case 6: getHours = "06"; break;
+					case 7: getHours = "07"; break;
+					case 8: getHours = "08"; break;
+					case 9: getHours = "09"; break;
+				}
+			} else {
+				getHours = currentdate.getHours();
+			}
+
+			if (currentdate.getMinutes() <= 9) {
+				switch (currentdate.getMinutes()) {
+					case 0: getMinutes = "00"; break;
+					case 1: getMinutes = "01"; break;
+					case 2: getMinutes = "02"; break;
+					case 3: getMinutes = "03"; break;
+					case 4: getMinutes = "04"; break;
+					case 5: getMinutes = "05"; break;
+					case 6: getMinutes = "06"; break;
+					case 7: getMinutes = "07"; break;
+					case 8: getMinutes = "08"; break;
+					case 9: getMinutes = "09"; break;
+				}
+			} else {
+				getMinutes = currentdate.getMinutes();
+			}
+
+			document.getElementById("time_now").innerHTML = 'Date & Time : ' + getDate + '/' + getMonth + '/' + currentdate.getFullYear() + ' - ' + getHours + ":" + getMinutes;
+		}, 1000);
+		
+	</script>
+
+</body>

@@ -1,7 +1,7 @@
 <html>
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Monitor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<title>Control Panel</title>
 	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="bootstrap-theme.min.css">
 
@@ -13,37 +13,18 @@
 
 </head>
 <body>
-	<!-- <nav class="navbar navbar-default"> -->
 
 		<div class="container">
-
-			<!-- <div class="navbar-header">
-		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		      </button>
-		      <a class="navbar-brand" href="#">NSC18</a>
-		    </div>
-
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		      <ul class="nav navbar-nav">
-		        <li class="active"><a href="#"><b>Chart</b> <span class="sr-only">(current)</span></a></li>
-		        <li><a href="#">Notes</a></li>
-		        
-		      </ul>
-		      
-		    </div> -->
 
 			<div class="row">
 
 				<div class="col-sm-12" style="margin-top:15px">
 					<div class="form-group">
 						<ul class="nav nav-tabs" style="background-color:#e6ffe6">
-						  <li role="presentation" class="active"><a href="#"><b>Chart</b></a></li>
-						  <li role="presentation"><a href="#">Notes</a></li>
-						  <li role="presentation"><a href="#">News</a></li>
+						  <li role="presentation" class="active"><a href="index.html"><b>Chart</b></a></li>
+						  <li role="presentation"><a href="control.html">Control</a></li>
+						  <li role="presentation"><a href="notes.html">Notes</a></li>
+						  <li role="presentation"><a href="news.html">News</a></li>
 						</ul>
 					</div>
 				</div>
@@ -64,8 +45,6 @@
 				</div>
 			</div>
 		</div>
-	<!-- </nav> -->
-
 
 	<script src="jquery-1.12.1.js"></script>
 	<script src="highcharts.js"></script>
@@ -92,7 +71,7 @@
 				$('#chart_now').highcharts({
 					chart: { backgroundColor: "#ffffe6"},
 			        title: {
-			            text: 'Sensor chart, To Day.',
+			            text: 'Sensor chart, Today.',
 			            x: -20 //center
 			        },
 			        subtitle: {
@@ -111,7 +90,7 @@
 			        },
 			        yAxis: {
 			            title: {
-			                text: 'Temperature & Humidity & Soil Moisture'
+			                text: 'Temperature & Humindity & Soil Moisture'
 			            },
 			            plotLines: [{
 			                value: 0,
@@ -211,7 +190,7 @@
 			        },
 			        yAxis: {
 			            title: {
-			                text: 'Temperature & Humidity & Soil Moisture'
+			                text: 'Temperature & Humindity & Soil Moisture'
 			            },
 			            plotLines: [{
 			                value: 0,
@@ -311,7 +290,7 @@
 			        },
 			        yAxis: {
 			            title: {
-			                text: 'Temperature & Humidity & Soil Moisture'
+			                text: 'Temperature & Humindity & Soil Moisture'
 			            },
 			            plotLines: [{
 			                value: 0,
